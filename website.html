@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+function randInt(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+function cat(){
+  let page = randInt(1, 300)
+  console.log(page)
+  fetch(`https://unsplash.com/napi/landing_pages/images/animals/cat?page=${page}&per_page=30`)
+  .then(resp => {
+    console.log(resp)
+    var img = document.createElement("img")
+    img.src = resp.data.photos[randInt(0, 10)].urls.regular
+    document.getElementById("body").appendChild(img)
+  })
+  .catch(err => console.log(err))
+}
+</script>
+<body id="body">
+    <button onclick="cat()">
+        click
+    </button>
+    
+</body>
+</html>
